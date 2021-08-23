@@ -145,7 +145,7 @@ let miles: 'MILES' = 'MILES';
 
 ### Interfaces
 
-//Interfaces describe the shape of the value, but don't contains definitions of the properties
+Interfaces describe the shape of the value, but don't contains definitions of the properties
 
 ```ts
 interface AttackFunction {
