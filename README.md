@@ -13,6 +13,8 @@ Some small, usefull, real life examples]
 - [Interfaces](#interfaces)
 - [Type assertions](#type-assertions)
 - [Generics](#generics)
+- [Enums](#enums)
+- [Function](#functions)
 
 
 ### Partial types
@@ -258,4 +260,73 @@ interface SuperHero1 {
 
 pushSomethingIntoCollection(wolverine as SuperHero1, superHereoes);
 pushSomethingIntoCollection('Radom text', powers);
+```
+
+## Enums
+
+A not a type-level extension checking, they allow you to define a set of named constants. Using enums can make it easier to document intent, or create a set of distinct case.
+
+```ts
+enum Num {
+  UNO = 1,
+  TWO,
+  THREE,
+}
+
+enum NumString {
+  UNO = 'UNO',
+  TWO,
+  THREE,
+}//This will ask you to initialize the rest of the values
+
+function getNum(number: Num) {
+  return number
+}
+
+getNum(Num.Uno);
+
+enum Direction {
+  Up = "UP",
+  Down = "DOWN",
+  Left = "LEFT",
+  Right = "RIGHT",
+}
+
+```
+
+### Functions
+
+Few examples with Inference and Constrains
+
+```ts
+function something<T>(arr: T[]) : T | undefined {
+  return arr[0]
+}
+
+function takeThis(arr: string[]): number[] {
+  return arr.map((x: string) => Number(x));
+}
+
+function takeThisYes<Input, Output>(arr: Input[], func: (arg: Input) => Output): Output[] {
+  return arr.map(func);
+}
+
+function longest<T extends {length: number}>(a: T, b: T): T {
+ if(a.length > b.length) {
+  return a
+ }
+  return b
+}
+
+longest('2', '10')
+longest(2, '10') // This throws an error as number does not have a length
+longest(['2'], ['10', '19'])
+
+function concat<T>(arg1: T[], arg2: T[]): T[] {
+  return arg1.concat(arg2)
+}
+
+concat([1,2], [3,4])
+concat([1,2], ['3', '4']) // This throws an error as we want both arrays to have the same type
+
 ```
