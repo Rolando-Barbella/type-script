@@ -1,6 +1,7 @@
 # TypeScript style sheet
 Some small, usefull, real life examples]
 
+- [Diference between types and interface](#diference-between-type-and-interface)
 - [Partial types](#partial-types)
 - [Required types](#required-types)
 - [Pick types](#pick-types)
@@ -16,7 +17,34 @@ Some small, usefull, real life examples]
 - [Enums](#enums)
 - [Function](#functions)
 
+### Diference between type and interface
+interfaces are open and type aliases are closed. This means you can extend an interface by declaring it a second time.
 
+```ts
+
+interface BirdInterface {
+  wings: 2;
+}
+//ALLOW
+interface BirdInterface {
+  wings: 10;
+}
+
+type BirdTypeYo = {
+  wings: 2;
+};
+//NOT ALLOW
+type BirdTypeYo = {
+  wings: 2;
+};
+
+//ALLOW
+
+interface BirdInterface extends Somthing {
+  wings: 2;
+}
+
+```
 ### Partial types
 
 ```ts
@@ -329,4 +357,28 @@ function concat<T>(arg1: T[], arg2: T[]): T[] {
 concat([1,2], [3,4])
 concat([1,2], ['3', '4']) // This throws an error as we want both arrays to have the same type
 
+```
+
+### void
+
+void represents the return value of functions which don’t return a value. It’s the inferred type any time a function doesn’t have any return statements, or doesn’t return any explicit value from those return statements:
+
+*void is not undefined
+
+```ts
+// The inferred return type is void
+function noop() {
+  return;
+}
+```
+
+### never
+Some functions never return a value:
+
+
+```ts
+// The inferred return type is void
+function fail(msg: string): never {
+  throw new Error(msg);
+}
 ```
